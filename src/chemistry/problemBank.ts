@@ -14,7 +14,7 @@ const p = (problem: Omit<ReactionProblem, 'hints'>): ReactionProblem => ({ ...pr
 export const problemBank: ReactionProblem[] = [
   p({
     id: 'nr-tertiary-iodide', title: 'Hindered carbon, non-ionizing medium',
-    substrate: 'tert-Butyl chloride', substrateSmiles: 'CC(C)(C)Cl', substrateClass: 'tertiary', leavingGroup: 'Cl',
+    substrate: '2-chloro-2-methylbutane', substrateSmiles: 'CCC(C)(C)Cl', substrateClass: 'tertiary', leavingGroup: 'Cl',
     reagent: 'sodium iodide', reagentKind: 'strong nucleophile', solvent: 'acetone (polar aprotic)', temperature: 'room temperature',
     mechanisms: ['No reaction'], intendedMechanism: 'No reaction', products: [{ name: 'No reaction', smiles: 'NO_REACTION', role: 'major' }], stereochemistry: 'Not applicable', difficulty: 'Introductory',
     concepts: ['no reaction', 'SN1 vs SN2', 'strong nucleophiles'], features: ['tertiary substrate blocks SN2', 'iodide is a strong nucleophile but weak base', 'acetone does not promote ionization'],
@@ -99,5 +99,61 @@ export const problemBank: ReactionProblem[] = [
     mechanisms: ['SN1'], intendedMechanism: 'SN1', products: [{ name: 'Allylic methyl ether', smiles: 'C=C(C)COC', role: 'major' }], stereochemistry: 'Not applicable', difficulty: 'Challenge',
     concepts: ['SN1 vs SN2', 'weak nucleophiles', 'carbocation stability'], features: ['allylic stabilization', 'methanol is a weak nucleophile', 'protic solvent'],
     explanation: 'The allylic carbocation is resonance-stabilized, so methanol can trap it through the SN1 pathway.'
+  }),
+  p({
+    id: 'sn2-acetate-inversion', title: 'Acetate substitutes with inversion',
+    substrate: 'chiral 2-bromopentane', substrateSmiles: 'CCC[C@H](Br)C', substrateClass: 'secondary', leavingGroup: 'Br',
+    reagent: 'sodium acetate', reagentKind: 'strong nucleophile', solvent: 'DMSO (polar aprotic)', temperature: 'room temperature',
+    mechanisms: ['SN2'], intendedMechanism: 'SN2', products: [{ name: '2-acetoxypentane (inverted configuration)', smiles: 'CCC[C@@H](OC(C)=O)C', role: 'major' }], stereochemistry: 'Inversion', difficulty: 'Intermediate',
+    concepts: ['SN1 vs SN2', 'strong nucleophiles', 'polar aprotic solvent'], features: ['selected secondary substrate', 'acetate is a nucleophile', 'backside attack'],
+    explanation: 'Acetate attacks the selected secondary carbon from the back in DMSO. Draw the acetate substitution product with inversion at that carbon.'
+  }),
+  p({
+    id: 'sn2-acetylide-inversion', title: 'Acetylide forms a carbon-carbon bond',
+    substrate: 'chiral 2-bromo-3-methylbutane', substrateSmiles: 'CC(C)[C@H](Br)C', substrateClass: 'secondary', leavingGroup: 'Br',
+    reagent: 'sodium acetylide', reagentKind: 'strong nucleophile', solvent: 'DMSO (polar aprotic)', temperature: 'cool',
+    mechanisms: ['SN2'], intendedMechanism: 'SN2', products: [{ name: 'alkynyl substitution product (inverted configuration)', smiles: 'CC(C)[C@@H](C)C#C', role: 'major' }], stereochemistry: 'Inversion', difficulty: 'Challenge',
+    concepts: ['SN1 vs SN2', 'strong nucleophiles', 'polar aprotic solvent'], features: ['acetylide is a strong carbon nucleophile', 'selected secondary substrate', 'backside attack'],
+    explanation: 'Acetylide is a strong carbon nucleophile. Under cool polar aprotic conditions it gives the SN2 carbon-carbon bond with inversion.'
+  }),
+  p({
+    id: 'sn2-lithium-bromide-inversion', title: 'Bromide displaces iodide',
+    substrate: 'chiral 2-iodobutane', substrateSmiles: 'C[C@H](I)CC', substrateClass: 'secondary', leavingGroup: 'I',
+    reagent: 'lithium bromide', reagentKind: 'strong nucleophile', solvent: 'acetone (polar aprotic)', temperature: 'room temperature',
+    mechanisms: ['SN2'], intendedMechanism: 'SN2', products: [{ name: '2-bromobutane (inverted configuration)', smiles: 'C[C@@H](Br)CC', role: 'major' }], stereochemistry: 'Inversion', difficulty: 'Intermediate',
+    concepts: ['SN1 vs SN2', 'strong nucleophiles', 'polar aprotic solvent'], features: ['bromide is nucleophilic in acetone', 'iodide is an excellent leaving group', 'backside attack'],
+    explanation: 'In acetone, bromide can displace iodide through SN2. Draw the substituted product with inversion at the reacting carbon.'
+  }),
+  p({
+    id: 'sn1-propanol-tert-amyl', title: 'Weak alcohol nucleophile captures a carbocation',
+    substrate: '2-bromo-2-methylbutane', substrateSmiles: 'CCC(C)(C)Br', substrateClass: 'tertiary', leavingGroup: 'Br',
+    reagent: '1-propanol', reagentKind: 'weak nucleophile', solvent: '1-propanol (polar protic)', temperature: 'heat',
+    mechanisms: ['SN1'], intendedMechanism: 'SN1', products: [{ name: 'tert-amyl propyl ether', smiles: 'CCCOC(C)(C)CC', role: 'major' }], stereochemistry: 'Not applicable', difficulty: 'Intermediate',
+    concepts: ['SN1 vs SN2', 'weak nucleophiles', 'carbocation stability'], features: ['tertiary substrate', 'propanol is a weak neutral nucleophile', 'protic solvent'],
+    explanation: 'The tertiary bromide ionizes first. The weak alcohol nucleophile, propanol, then captures the carbocation to form an ether.'
+  }),
+  p({
+    id: 'sn1-butanol-benzylic', title: 'Butanol traps a benzylic carbocation',
+    substrate: '2-chloro-2-phenylpropane', substrateSmiles: 'CC(Cl)(C)c1ccccc1', substrateClass: 'tertiary', leavingGroup: 'Cl',
+    reagent: '1-butanol', reagentKind: 'weak nucleophile', solvent: '1-butanol (polar protic)', temperature: 'heat',
+    mechanisms: ['SN1'], intendedMechanism: 'SN1', products: [{ name: 'tert-benzylic butyl ether', smiles: 'CCCCOC(C)(C)c1ccccc1', role: 'major' }], stereochemistry: 'Not applicable', difficulty: 'Challenge',
+    concepts: ['SN1 vs SN2', 'weak nucleophiles', 'carbocation stability'], features: ['tertiary benzylic substrate', 'butanol is a weak neutral nucleophile', 'resonance stabilization'],
+    explanation: 'This tertiary benzylic carbocation is especially stabilized. Butanol captures it after ionization to give the substitution product.'
+  }),
+  p({
+    id: 'sn1-racemize-benzylic', title: 'Racemization from a planar benzylic cation',
+    substrate: 'chiral 2-bromo-2-phenylbutane', substrateSmiles: 'CC[C@](Br)(C)c1ccccc1', substrateClass: 'tertiary', leavingGroup: 'Br',
+    reagent: 'water', reagentKind: 'weak nucleophile', solvent: 'water/acetone (polar protic)', temperature: 'heat',
+    mechanisms: ['SN1'], intendedMechanism: 'SN1', products: [{ name: 'racemic 2-phenylbutan-2-ol', smiles: 'CCC(O)(C)c1ccccc1', role: 'major' }], stereochemistry: 'Racemization', difficulty: 'Challenge',
+    concepts: ['SN1 vs SN2', 'weak nucleophiles', 'carbocation stability'], features: ['chiral tertiary benzylic center', 'planar carbocation intermediate', 'water is a weak nucleophile'],
+    explanation: 'Ionization removes the stereochemical information at the reacting center. Water can attack either face of the planar benzylic carbocation, giving a racemic alcohol.'
+  }),
+  p({
+    id: 'sn1-hydride-shift-water', title: 'Rearrangement before substitution',
+    substrate: '3-bromo-2-methylbutane', substrateSmiles: 'CC(C)C(Br)C', substrateClass: 'secondary', leavingGroup: 'Br',
+    reagent: 'water', reagentKind: 'weak nucleophile', solvent: 'water (polar protic)', temperature: 'heat',
+    mechanisms: ['SN1'], intendedMechanism: 'SN1', products: [{ name: '2-methyl-2-butanol after hydride shift', smiles: 'CCC(C)(C)O', role: 'major' }], stereochemistry: 'Not applicable', difficulty: 'Challenge',
+    concepts: ['SN1 vs SN2', 'weak nucleophiles', 'carbocation stability'], features: ['secondary carbocation can rearrange', '1,2-hydride shift forms tertiary carbocation', 'water traps the rearranged cation'],
+    explanation: 'After bromide leaves, a 1,2-hydride shift produces a more stable tertiary carbocation. Water then attacks that rearranged carbocation, so draw the rearranged alcohol.'
   }),
 ];

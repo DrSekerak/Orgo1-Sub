@@ -7,9 +7,11 @@ A static React learning application for sophomore organic chemistry students pra
 - A focused mechanism choice: SN1, SN2, or No reaction.
 - “No reaction” is a first-class answer option. For these reviewed templates, students draw the unchanged starting material in Ketcher.
 - A deterministic, instructor-reviewed bank of SN1, SN2, and no-reaction templates across introductory/intermediate/challenge levels.
-- Strong nucleophiles (iodide, methoxide, cyanide, and azide) and weak nucleophiles (water, methanol, and ethanol) in chemically reviewed contexts.
+- Strong nucleophiles (iodide, bromide, methoxide, cyanide, azide, acetate, and acetylide) and weak nucleophiles (water, methanol, ethanol, propanol, and butanol) in chemically reviewed contexts.
+- Multiple SN2 inversion, SN1 racemization, and SN1 hydride-shift/rearrangement problems, without duplicate substrate-and-condition templates.
 - Immediate, concept-based feedback; progressive hints; full solutions on request; and browser-local session analytics.
 - Molecule rendering with [RDKit.js](https://www.rdkit.org/docs/GettingStartedInJS.html) and product drawing with Ketcher. Students see and draw line-angle (skeletal) structures; RDKit canonicalizes Ketcher output for structure-based checking.
+- When an instructor-reviewed template has multiple co-major products, students draw every product as a separate disconnected structure on one Ketcher canvas; the checker requires the complete set.
 - Accessible semantic controls, keyboard navigation, high-contrast focus styles, non-color feedback labels, responsive layouts, and no account or server.
 
 ## Architecture

@@ -20,3 +20,9 @@ export async function equivalentDrawnStructure(drawnSmiles: string, expectedSmil
   const [drawn, expected] = await Promise.all([canonicalSmiles(drawnSmiles), canonicalSmiles(expectedSmiles)]);
   return Boolean(drawn && expected && drawn === expected);
 }
+
+/** Canonical RDKit SMILES compare all disconnected structures on a Ketcher canvas as one product set. */
+export async function equivalentDrawnStructures(drawnSmiles: string, expectedSmiles: string[]) {
+  if (!expectedSmiles.length) return false;
+  return equivalentDrawnStructure(drawnSmiles, expectedSmiles.join('.'));
+}
