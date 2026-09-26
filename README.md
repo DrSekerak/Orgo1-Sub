@@ -43,7 +43,7 @@ pnpm build
 
 ## Deploy to GitHub Pages
 
-Push this directory as the repository root (or adjust workflow working directories if retaining it as a subdirectory). In GitHub, set **Settings → Pages → Source** to **GitHub Actions**. The supplied workflow runs tests and deploys `dist`. Vite is explicitly configured for this project site at `/Orgo1-Sub-Elim/`, so JavaScript, CSS, and RDKit WebAssembly assets resolve correctly at `https://drsekerak.github.io/Orgo1-Sub-Elim/`.
+Push this directory as the repository root (or adjust workflow working directories if retaining it as a subdirectory). In GitHub, set **Settings → Pages → Source** to **GitHub Actions**. The supplied workflow runs tests and deploys `dist`. Vite is explicitly configured for this project site at `/Orgo1-Sub/`, so JavaScript, CSS, and RDKit WebAssembly assets resolve correctly at `https://drsekerak.github.io/Orgo1-Sub/`.
 
 ## Add a reviewed problem template
 

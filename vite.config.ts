@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// This repository is deployed as the drsekerak.github.io/Orgo1-Sub-Elim project site.
+// This repository is deployed as the drsekerak.github.io/Orgo1-Sub project site.
 // A trailing slash is required so Vite prefixes every JS, CSS, and WASM asset correctly.
 export default defineConfig({
-  base: '/Orgo1-Sub-Elim/',
+  base: '/Orgo1-Sub/',
   plugins: [react()],
   // Ketcher core uses EventEmitter; map that Node built-in to its browser implementation.
   resolve: { alias: { events: 'events/' } },
