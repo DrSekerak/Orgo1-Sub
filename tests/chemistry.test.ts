@@ -1,0 +1,15 @@
+import { describe, expect, it } from 'vitest';
+import { classifySubstrate, viableMechanisms } from '../src/chemistry/rules';
+import { equivalentStructures } from '../src/chemistry/equivalence';
+import { generateProblem, eligibleProblems } from '../src/chemistry/generator';
+import { problemBank } from '../src/chemistry/problemBank';
+import { checkAnswer } from '../src/chemistry/checker';
+describe('introductory chemistry engine',()=>{
+ it('classifies representative substrates',()=>{expect(classifySubstrate('CBr')).toBe('methyl');expect(classifySubstrate('CCBr')).toBe('primary');expect(classifySubstrate('CC(C)Br')).toBe('secondary');expect(classifySubstrate('CC(C)(C)Br')).toBe('tertiary')});
+ it('selects viable families from conditions',()=>{expect(viableMechanisms({substrateClass:'primary',reagentKind:'strong nucleophile',solvent:'DMSO',temperature:'room'})).toEqual(['SN2']);expect(viableMechanisms({substrateClass:'tertiary',reagentKind:'strong base',solvent:'ethanol',temperature:'heat'})).toEqual(['E2']);expect(viableMechanisms({substrateClass:'tertiary',reagentKind:'weak nucleophile/base',solvent:'water',temperature:'heat'})).toEqual(['E1','SN1'])});
+ it('contains reviewed templates for all mechanism families and levels',()=>{for(const m of ['SN1','SN2','E1','E2'])expect(problemBank.some(p=>p.intendedMechanism===m)).toBe(true);for(const d of ['Introductory','Intermediate','Challenge'])expect(problemBank.some(p=>p.difficulty===d)).toBe(true)});
+ it('supports no-reaction outcomes only from curated templates',()=>{const p=problemBank.find(x=>x.id==='nr-tertiary-iodide')!;expect(p.intendedMechanism).toBe('No reaction');expect(p.products[0].smiles).toBe('NO_REACTION');expect(checkAnswer(p,{mechanism:'No reaction',productSmiles:'NO_REACTION',stereochemistry:'Not applicable'}).level).toBe('correct');expect(checkAnswer(p,{mechanism:'SN1',productSmiles:'NO_REACTION'}).level).toBe('partial')});
+ it('generates only matching valid problems deterministically',()=>{const s={mechanism:'E2' as const,difficulty:'Challenge' as const,mode:'mixed' as const,concepts:[],seed:9};expect(generateProblem(s).intendedMechanism).toBe('E2');expect(generateProblem(s).id).toBe(generateProblem(s).id);expect(eligibleProblems({...s,concepts:['regioselectivity']}).every(p=>p.concepts.includes('regioselectivity'))).toBe(true)});
+ it('checks products, stereo, regio, and mechanism',()=>{const p=problemBank.find(x=>x.id==='e2-hofmann')!;expect(checkAnswer(p,{mechanism:'E2',productSmiles:'C=C(C)CC',stereochemistry:'Anti elimination',regio:'Hofmann'}).level).toBe('correct');expect(checkAnswer(p,{mechanism:'SN2',productSmiles:'CC=C(C)C'}).level).toBe('incorrect');const sn2=problemBank.find(x=>x.id==='sn2-chiral')!;expect(checkAnswer(sn2,{mechanism:'SN2',productSmiles:sn2.products[0].smiles,stereochemistry:'Racemization'}).level).toBe('partial')});
+ it('recognizes normalized identical structures without raw name comparison',()=>expect(equivalentStructures(' C C I ','CCI')).toBe(true));
+});
