@@ -8,7 +8,7 @@ A static React learning application for sophomore organic chemistry students pra
 - “No reaction” is a first-class answer option, with reviewed templates for conditions that lack a viable introductory SN1, SN2, E1, or E2 pathway.
 - A deterministic, instructor-reviewed bank of 16 reaction templates across SN1, SN2, E1, E2 and introductory/intermediate/challenge levels.
 - Immediate, concept-based feedback; progressive hints; full solutions on request; and browser-local session analytics.
-- Molecule rendering with [RDKit.js](https://www.rdkit.org/docs/GettingStartedInJS.html). Structures are retained as SMILES, including stereochemical annotations where applicable.
+- Molecule rendering with [RDKit.js](https://www.rdkit.org/docs/GettingStartedInJS.html). Students see line-angle (skeletal) structures; the application retains SMILES internally, including stereochemical annotations where applicable.
 - Accessible semantic controls, keyboard navigation, high-contrast focus styles, non-color feedback labels, responsive layouts, and no account or server.
 
 ## Architecture
@@ -42,7 +42,7 @@ npm run build
 
 ## Deploy to GitHub Pages
 
-Push this directory as the repository root (or adjust workflow working directories if retaining it as a subdirectory). In GitHub, set **Settings → Pages → Source** to **GitHub Actions**. The supplied workflow runs tests, builds with `VITE_BASE=/<repository-name>/`, and deploys `dist`, so Vite asset paths work under a project-site subpath. For a user/organization site, set `VITE_BASE=/` in the workflow instead.
+Push this directory as the repository root (or adjust workflow working directories if retaining it as a subdirectory). In GitHub, set **Settings → Pages → Source** to **GitHub Actions**. The supplied workflow runs tests and deploys `dist`. Vite is explicitly configured for this project site at `/Orgo1-Sub-Elim/`, so JavaScript, CSS, and RDKit WebAssembly assets resolve correctly at `https://drsekerak.github.io/Orgo1-Sub-Elim/`.
 
 ## Add a reviewed problem template
 

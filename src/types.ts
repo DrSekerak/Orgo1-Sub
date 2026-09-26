@@ -10,6 +10,6 @@ export interface ReactionProblem {
  mechanisms: AnswerMechanism[]; intendedMechanism: AnswerMechanism; products: Product[]; stereochemistry: Stereo; difficulty: Difficulty; concepts: string[];
  explanation: string; features: string[]; hints: string[];
 }
-export interface StudentAnswer { mechanism?: AnswerMechanism; productSmiles?: string; stereochemistry?: Stereo; regio?: 'Zaitsev'|'Hofmann'; explanation?: string; }
+export interface StudentAnswer { mechanism?: AnswerMechanism; productSmiles?: string; productIsStructureEquivalent?: boolean; stereochemistry?: Stereo; regio?: 'Zaitsev'|'Hofmann'; explanation?: string; }
 export interface CheckResult { level: 'correct'|'partial'|'incorrect'; message: string; points: number; }
 export interface Progress { attempted: number; correct: number; byMechanism: Partial<Record<AnswerMechanism,{attempted:number;correct:number}>>; byConcept: Record<string,{attempted:number;correct:number}>; mistakes: string[]; }

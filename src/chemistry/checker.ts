@@ -3,7 +3,7 @@ import type { CheckResult, ReactionProblem, StudentAnswer } from '../types';
 export function checkAnswer(p: ReactionProblem, a: StudentAnswer): CheckResult {
  const major=p.products.find(x=>x.role==='major')!;
  const mechanism=a.mechanism===p.intendedMechanism;
- const product=!a.productSmiles || equivalentStructures(a.productSmiles,major.smiles);
+ const product=!a.productSmiles || (a.productIsStructureEquivalent ?? equivalentStructures(a.productSmiles,major.smiles));
  const stereo=!a.stereochemistry || a.stereochemistry===p.stereochemistry;
  const regio=!major.regio || !a.regio || a.regio===major.regio;
  const score=[mechanism,product,stereo,regio].filter(Boolean).length / [mechanism,product,stereo,regio].length;

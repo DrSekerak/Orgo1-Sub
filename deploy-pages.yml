@@ -8,13 +8,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 20, cache: npm, cache-dependency-path: orgo-mechanisms-practice/package-lock.json }
-      - run: npm install
-        working-directory: orgo-mechanisms-practice
-      - run: npm run test && VITE_BASE=/${{ github.event.repository.name }}/ npm run build
-        working-directory: orgo-mechanisms-practice
+        with: { node-version: 20, cache: pnpm, cache-dependency-path: pnpm-lock.yaml }
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test && pnpm build
       - uses: actions/upload-pages-artifact@v3
-        with: { path: orgo-mechanisms-practice/dist }
+        with: { path: dist }
   deploy:
     environment: { name: github-pages, url: ${{ steps.deployment.outputs.page_url }} }
     needs: build
