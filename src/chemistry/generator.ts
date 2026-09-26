@@ -1,7 +1,7 @@
 import { instructorConfig } from '../config/instructorConfig';
 import { problemBank } from './problemBank';
-import type { Difficulty, Mechanism, PracticeMode, ReactionProblem } from '../types';
-export interface Selection { mechanism: Mechanism|'Mixed'; difficulty: Difficulty; mode: PracticeMode; concepts: string[]; seed?: number; }
+import type { AnswerMechanism, Difficulty, ReactionProblem } from '../types';
+export interface Selection { mechanism: AnswerMechanism|'Mixed'; difficulty: Difficulty; concepts: string[]; seed?: number; }
 /** Deterministic rotation, not random chemistry: filters only instructor-reviewed templates. */
 export function eligibleProblems(s: Selection) {
  return problemBank.filter(p => (p.intendedMechanism === 'No reaction' ? instructorConfig.allowNoReaction : instructorConfig.enabledMechanisms.includes(p.intendedMechanism)) && instructorConfig.enabledDifficulties.includes(p.difficulty) &&
