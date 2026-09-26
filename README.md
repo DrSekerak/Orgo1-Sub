@@ -1,14 +1,14 @@
 # Mechanism Lab
 
-A static React learning application for sophomore organic chemistry students practicing introductory SN1, SN2, E1, and E2 decisions. It emphasizes the sequence chemists use: substrate → reagent → solvent → temperature → competing pathways → product → stereochemical/regiochemical consequence.
+A static React learning application for sophomore organic chemistry students practicing introductory SN1, SN2, E1, and E2 decisions. Each problem asks students to identify the mechanism and draw the major product in Ketcher.
 
 ## What is included
 
 - Five practice modes: identify mechanism, predict product, explain, mixed, and targeted concepts.
-- “No reaction” is a first-class answer option, with reviewed templates for conditions that lack a viable introductory SN1, SN2, E1, or E2 pathway.
+- “No reaction” is a first-class answer option. For these reviewed templates, students draw the unchanged starting material in Ketcher.
 - A deterministic, instructor-reviewed bank of 16 reaction templates across SN1, SN2, E1, E2 and introductory/intermediate/challenge levels.
 - Immediate, concept-based feedback; progressive hints; full solutions on request; and browser-local session analytics.
-- Molecule rendering with [RDKit.js](https://www.rdkit.org/docs/GettingStartedInJS.html). Students see line-angle (skeletal) structures; the application retains SMILES internally, including stereochemical annotations where applicable.
+- Molecule rendering with [RDKit.js](https://www.rdkit.org/docs/GettingStartedInJS.html) and product drawing with Ketcher. Students see and draw line-angle (skeletal) structures; RDKit canonicalizes Ketcher output for structure-based checking.
 - Accessible semantic controls, keyboard navigation, high-contrast focus styles, non-color feedback labels, responsive layouts, and no account or server.
 
 ## Architecture
@@ -18,7 +18,7 @@ A static React learning application for sophomore organic chemistry students pra
 | Chemistry rules | `src/chemistry/rules.ts` | Narrow introductory classifications and mechanism viability rules. |
 | Validated data | `src/chemistry/problemBank.ts` | Curated substrate/condition/product templates and instructor explanations. |
 | Generation | `src/chemistry/generator.ts` | Deterministic filtering/rotation; it never invents reaction combinations. |
-| Validation | `src/chemistry/checker.ts`, `equivalence.ts` | Mechanism/product/stereo/regio evaluation. RDKit renders machine-readable SMILES. |
+| Validation | `src/chemistry/checker.ts`, `structureValidation.ts` | Mechanism and Ketcher product-drawing evaluation using canonical SMILES. |
 | UI | `src/App.tsx`, `src/components` | Student workflow and visual decision guide. |
 | Instructor controls | `src/config/instructorConfig.ts` | Enabled mechanisms, levels, learning objectives, and feedback wording. |
 
@@ -26,18 +26,18 @@ The deliberately narrow `rules.ts` is not a general chemistry predictor. If an e
 
 ## Run locally
 
-Install Node 20+ and npm, then from this directory:
+Install Node 24.14.1+ and pnpm, then from this directory:
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Open the Vite URL shown in the terminal. Production checks are:
 
 ```bash
-npm run test
-npm run build
+pnpm test
+pnpm build
 ```
 
 ## Deploy to GitHub Pages
@@ -54,4 +54,4 @@ Push this directory as the repository root (or adjust workflow working directori
 
 ## Limits and chemistry review
 
-The application intentionally omits advanced effects and arbitrary freehand structure input. Product answers use controlled structure choices so every answer has a validated reference. `equivalence.ts` currently provides a conservative normalized-SMILES fallback; a future expansion accepting freeform student structures should canonicalize both structures through RDKit and add a chemistry-review test suite before release.
+The application intentionally omits advanced mechanisms and exceptions. Ketcher drawings are checked against instructor-reviewed structures through RDKit canonical SMILES; uncertain chemistry belongs in a reviewed template and test rather than a broad inferred rule.
